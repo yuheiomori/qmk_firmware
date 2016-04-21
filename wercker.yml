@@ -2,18 +2,13 @@ box: ymotongpoo/ergodox:v2
 build:
   steps:
     - script:
-        name: cloning firmware git repository.
-        cwd: /home/ergodox
-        code: |
-          git clone https://github.com/ymotongpoo/qmk_firmware.git
-    - script:
         name: build default keymap.
-        cwd: /home/ergodox/qmk_firmware/keyboard/ergodox_ez
+        cwd: $WERCKER_SOURCE_DIR/qmk_firmware/keyboard/ergodox_ez
         code: |
           make clean && make KEYMAP=default
     - script:
         name: move built firmware to output dir.
-        cwd: /home/ergodox/qmk_firmware/keyboard/ergodox_ez
+        cwd: $WERCKER_SOURCE_DIR/qmk_firmware/keyboard/ergodox_ez
         code: |
           mv ergodox_ez.hex $WERCKER_OUTPUT_DIR
 deploy:
