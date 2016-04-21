@@ -19,4 +19,3 @@ USER ergodox
 WORKDIR /home/ergodox
 RUN git clone https://github.com/ymotongpoo/qmk_firmware.git
 WORKDIR /home/ergodox/qmk_firmware/keyboard/ergodox_ez
-
