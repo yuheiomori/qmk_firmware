@@ -1,6 +1,5 @@
 box: 
   id: ymotongpoo/ergodox:v2
-  entrypoint: /bin/bash -c
 
 build:
   steps:
