@@ -9,7 +9,7 @@ build:
           echo /etc/lsb-release && uname -a
     - script:
         name: build default keymap.
-        cwd: $WERCKER_SOURCE_DIR/qmk_firmware/keyboard/ergodox_ez
+        cwd: qmk_firmware/keyboard/ergodox_ez
         code: |
           make clean && make KEYMAP=default
     - script:
