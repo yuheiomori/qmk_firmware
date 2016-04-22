@@ -6,15 +6,15 @@ build:
     - script:
         name: confirm docker image version.
         code: |
-          echo /etc/lsb-release && uname -a
+          cat /etc/lsb-release && uname -a
     - script:
         name: build default keymap.
-        cwd: qmk_firmware/keyboard/ergodox_ez
+        cwd: $WERCKER_SOURCE_DIR/keyboard/ergodox_ez
         code: |
           make clean && make KEYMAP=default
     - script:
         name: move built firmware to output dir.
-        cwd: $WERCKER_SOURCE_DIR/qmk_firmware/keyboard/ergodox_ez
+        cwd: $WERCKER_SOURCE_DIR/keyboard/ergodox_ez
         code: |
           mv ergodox_ez.hex $WERCKER_OUTPUT_DIR
 deploy:
