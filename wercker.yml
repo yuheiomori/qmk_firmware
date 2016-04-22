@@ -1,6 +1,12 @@
-box: ymotongpoo/ergodox:v2
+box: 
+  id: ymotongpoo/ergodox:v2
+
 build:
   steps:
+    - script:
+        name: confirm docker image version.
+        code: |
+          echo /etc/lsb-release && uname -a
     - script:
         name: build default keymap.
         cwd: $WERCKER_SOURCE_DIR/qmk_firmware/keyboard/ergodox_ez
