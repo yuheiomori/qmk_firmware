@@ -1,5 +1,5 @@
 box: 
-  id: ymotongpoo/ergodox:wercker
+  id: ymotongpoo/ubuntu-trusty:wercker
 
 build:
   steps:

@@ -16,6 +16,7 @@ RUN apt-get install -y \
   dfu-util \
   dfu-programmer \
   git-core \
+  curl \
 && apt-get clean \
 && rm -rf /var/lib/apt/lists/*
 
