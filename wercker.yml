@@ -1,5 +1,5 @@
 box: 
-  id: ymotongpoo/ergodox:v2
+  id: ymotongpoo/ergodox:wercker
 
 build:
   steps:
@@ -19,13 +19,7 @@ build:
           mv ergodox_ez.hex $WERCKER_OUTPUT_DIR
 deploy:
   steps:
-    - github-create-release:
-        token: $GITHUB_TOKEN
-        tag: $GITHUB_RELEASE_VERSION
-        title: Application $GITHUB_RELEASE_VERSION
-        draft: true
-    - github-upload-asset:
-        token: $GITHUB_TOKEN
-        file: ergodox_ez.hex
-        filename: ergodox_ez-$GITHUB_RELEASE_VERSION.hex
-  
+    - script:
+        name: put built hex file to bintray.
+        code: |
+          curl -T $WERCKER_SOURCE_DIR/ergodox_ez.hex -u$BINTRAY_USERNAME:$BINTRAY_APIKEY https://api.bintray.com/content/ymotongpoo/ergodox/ergodox.hex/1/ergodox.hex

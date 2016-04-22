@@ -1,5 +1,7 @@
-FROM ubuntu:latest
+FROM ubuntu:trusty
 MAINTAINER Yoshi Yamaguchi ymotongpoo
+
+ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y \
@@ -12,16 +14,8 @@ RUN apt-get install -y \
   binutils-avr \
   avr-libc \
   dfu-util \
-  git-core
-RUN mkdir -p /home/ergodox 
-RUN useradd -s /bin/bash ergodox
-RUN chown ergodox /home/ergodox
-RUN mkdir -p /pipeline/build
-RUN chown ergodox /pipeline/build
-RUN chmod 777 /pipeline/build
-RUN mkdir -p /drone/src
-RUN chown ergodox /drone/src
-RUN chmod 777 /drone/src
-RUN echo 'ergodox ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
-USER ergodox
-WORKDIR /home/ergodox
+  dfu-programmer \
+  git-core \
+&& apt-get clean \
+&& rm -rf /var/lib/apt/lists/*
+
