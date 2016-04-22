@@ -1,5 +1,5 @@
 build:
-  image: ymotongpoo/ergodox:v2
+  image: ymotongpoo/ergodox:v2.1
   commands:
     - cd /home/ergodox
     - git clone https://bitbucket.org/ymotongpoo/qmk_firmware.git

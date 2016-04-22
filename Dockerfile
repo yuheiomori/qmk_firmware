@@ -19,6 +19,9 @@ RUN chown ergodox /home/ergodox
 RUN mkdir -p /pipeline/build
 RUN chown ergodox /pipeline/build
 RUN chmod 777 /pipeline/build
+RUN mkdir -p /drone/src
+RUN chown ergodox /drone/src
+RUN chmod 777 /drone/src
 RUN echo 'ergodox ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 USER ergodox
 WORKDIR /home/ergodox
