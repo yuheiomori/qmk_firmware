@@ -1,0 +1,30 @@
+build:
+  image: ymotongpoo/ergodox:v2
+  commands:
+    - cd /home/ergodox
+    - git clone https://bitbucket.org/ymotongpoo/qmk_firmware.git
+    - cd /home/ergodox/qmk_firmware/keyboard/ergodox_ez
+    - make clean && make KEYMAP=default
+    - mv ergodox_ez.hex /drone/src
+
+publish:
+  bintray:
+    username: $$BINTRAY_USERNAME
+    api_key: $$BINTRAY_APIKEY
+    branch: master
+    artifacts:
+      - file: ergodox_ez.hex
+        owner: ymotongpoo
+        type: ergodox
+        repository: ergodox
+        package: ergodox.hex
+        version: 1
+        target: ergodox.hex
+        publish: true
+        override: true
+
+notify:
+  slack:
+    webhook_url: https://hooks.slack.com/services/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
+    channel: feed
+    username: drone
