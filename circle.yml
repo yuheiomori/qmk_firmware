@@ -7,12 +7,11 @@ dependencies:
     - docker info
     - docker build -f dockerfiles/Dockerfile.ubuntu-trusty-wercker -t ymotongpoo/ubuntu-trusty:wercker .
 
-test:
-  pre:
-    - echo "move to ergodox_ez directory"
-    - ls $HOME
-    - cd $HOME/qmk_firmware/keyboard/ergodox_ez
+test:  
   override:
+    - echo "move to ergodox_ez directory"
+    - cd $HOME/qmk_firmware/keyboard/ergodox_ez
+    - echo "build firmware"
     - make KEYMAP=$TARGET_KEYMAP
 
 deployment:
