@@ -10,7 +10,7 @@ dependencies:
 test:
   pre:
     - echo "move to ergodox_ez directory"
-    - ls
+    - ls $HOME
     - cd $HOME/qmk_firmware/keyboard/ergodox_ez
   override:
     - make KEYMAP=$TARGET_KEYMAP
