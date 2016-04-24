@@ -14,8 +14,8 @@ test:
     - make KEYMAP=$TARGET_KEYMAP
 
 deployment:
-  branch: master
   deploy:
+    branch: master
     commands:
       - cd keyboard/ergodox_ez
       - echo "put built hex file to bintray"
