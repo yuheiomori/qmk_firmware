@@ -5,7 +5,7 @@ machine:
 dependencies:
   override:
     - docker info
-    - docker build -t ymotongpoo/ubuntu-trusty:wercker .
+    - docker build -f dockerfiles/Dockerfile.ubuntu-trusty-wercker -t ymotongpoo/ubuntu-trusty:wercker .
 
 test:
   pre:
