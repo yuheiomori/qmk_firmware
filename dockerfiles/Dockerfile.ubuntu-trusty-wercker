@@ -2,6 +2,7 @@ FROM ubuntu:trusty
 MAINTAINER Yoshi Yamaguchi ymotongpoo
 
 ENV DEBIAN_FRONTEND noninteractive
+ENV PATH=/usr/bin:$PATH
 
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y \
