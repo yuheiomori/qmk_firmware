@@ -12,7 +12,8 @@ test:
     - echo "move to ergodox_ez directory"
     - cd $HOME/qmk_firmware/keyboard/ergodox_ez
     - echo "build firmware"
-    - make KEYMAP=$TARGET_KEYMAP
+    - ls && echo ${TARGET_KEYMAP}
+    - make KEYMAP=${TARGET_KEYMAP}
 
 deployment:
   deploy:
@@ -20,6 +21,6 @@ deployment:
     commands:
       - cd $HOME/qmk_firmware/keyboard/ergodox_ez
       - echo "put built hex file to bintray"
-      - curl -T ergodox_ez.hex -u$BINTRAY_USERNAME:$BINTRAY_APIKEY https://api.bintray.com/content/$BINTRAY_USERNAME/generic/ergodox.hex/$WERCKER_GIT_BRANCH-circle-$WERCKER_GIT_COMMIT/ergodox.hex
+      - curl -T ergodox_ez.hex -u${BINTRAY_USERNAME}:${BINTRAY_APIKEY} https://api.bintray.com/content/${BINTRAY_USERNAME}/generic/ergodox.hex/${CIRCLE_BRANCH}-circle-${CIRCLE_BUILD_NUM}/ergodox.hex
       - echo "publish uploaded hex file"
-      - curl -X POST -u$BINTRAY_USERNAME:$BINTRAY_APIKEY https://api.bintray.com/content/$BINTRAY_USERNAME/generic/ergodox.hex/$WERCKER_GIT_BRANCH-circle-$WERCKER_GIT_COMMIT/publish
+      - curl -X POST -u${BINTRAY_USERNAME}:${BINTRAY_APIKEY} https://api.bintray.com/content/$BINTRAY_USERNAME/generic/ergodox.hex/${CIRCLE_BRANCH}-circle-${CIRCLE_BUILD_NUM}/publish
