@@ -10,7 +10,8 @@ dependencies:
 test:
   pre:
     - echo "move to ergodox_ez directory"
-    - cd keyboard/ergodox_ez
+    - ls
+    - cd $HOME/qmk_firmware/keyboard/ergodox_ez
   override:
     - make KEYMAP=$TARGET_KEYMAP
 
@@ -18,7 +19,7 @@ deployment:
   deploy:
     branch: master
     commands:
-      - cd keyboard/ergodox_ez
+      - cd $HOME/qmk_firmware/keyboard/ergodox_ez
       - echo "put built hex file to bintray"
       - curl -T ergodox_ez.hex -u$BINTRAY_USERNAME:$BINTRAY_APIKEY https://api.bintray.com/content/$BINTRAY_USERNAME/generic/ergodox.hex/$WERCKER_GIT_BRANCH-circle-$WERCKER_GIT_COMMIT/ergodox.hex
       - echo "publish uploaded hex file"
