@@ -21,7 +21,7 @@
 
 #include "keymap_common.h"
 
-#define CTLKC_T(kc1, kc2) (kc2 | 0x7000 | ((kc1 | 0x0100) & 0xF) << 8))
-#define GUIKC_T(kc1, kc2) (kc2 | 0x7000 | ((kc1 | 0x0800) & 0xF) << 8))
+#define CTLKC_T(kc1, kc2) (kc2 | 0x7000 | (((kc1 | 0x0100) & 0xF) << 8))
+#define GUIKC_T(kc1, kc2) (kc2 | 0x7000 | (((kc1 | 0x0800) & 0xF) << 8))
 
 #endif
