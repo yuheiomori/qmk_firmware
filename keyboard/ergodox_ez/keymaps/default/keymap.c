@@ -2,6 +2,7 @@
 // https://github.com/msc654/qmk_firmware/blob/master/keyboard%2Fergodox_ez%2Fkeymaps%2Fdefault%2Fkeymap.c
 
 #include "ergodox_ez.h"
+#include "additoinal_keycode.h"
 #include "debug.h"
 #include "action_layer.h"
 
@@ -17,7 +18,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
  * | Tab    |   Q  |   W  |   E  |   R  |   T  | Tab  |           |  L1  |   Y  |   U  |   I  |   O  |   P  |   \    |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * | CTRL   |   A  |   S  |   D  |   F  |   G  |------|           |------|   H  |   J  |   K  |   L  |   ;  |   '"   |
+ * | CTRL   |A/G+A |   S  |   D  |   F  |   G  |------|           |------|   H  |   J  |   K  |   L  |   ;  |   '"   |
  * |--------+------+------+------+------+------| LGui |           | Meh  |------+------+------+------+------+--------|
  * | LShift |   Z  |   X  |   C  |   V  |   B  |      |           |      |   N  |   M  |   ,  |   .  |   /  | RShift |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
@@ -35,10 +36,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Otherwise, it needs KC_*
 [OSX] = KEYMAP(  // layer 0 : default
         // left hand
-        KC_EQL,         KC_1,         KC_2,   KC_3,   KC_4,   KC_5,   KC_GRV,
-        KC_TAB,         KC_Q,         KC_W,   KC_E,   KC_R,   KC_T,   KC_TAB,
-        KC_LCTL,        KC_A,         KC_S,   KC_D,   KC_F,   KC_G,
-        KC_LSFT,        KC_Z,         KC_X,   KC_C,   KC_V,   KC_B,   KC_LGUI,
+        KC_EQL,         KC_1,                 KC_2,   KC_3,   KC_4,   KC_5,   KC_GRV,
+        KC_TAB,         KC_Q,                 KC_W,   KC_E,   KC_R,   KC_T,   KC_TAB,
+        KC_LCTL,        GUIKC_T(KC_A, KC_A),  KC_S,   KC_D,   KC_F,   KC_G,
+        KC_LSFT,        KC_Z,                 KC_X,   KC_C,   KC_V,   KC_B,   KC_LGUI,
         TO(SYMB,1),     LGUI(KC_V),   LGUI(KC_C),   KC_LEFT,KC_RGHT,
                                                KC_LGUI,       KC_LALT,
                                                               KC_HOME,
