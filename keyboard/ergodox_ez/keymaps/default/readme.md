@@ -1,14 +1,17 @@
 # ErgoDox EZ Default Configuration
 ## Layout
 
-### [Layer 0](http://goo.gl/qteHWJ)
+### [Layer 0](http://goo.gl/hzV8tn)
 ![Layer 0](keyboard-layout-L0.png)
 
-### [Layer 1](http://goo.gl/tBx58O)
+### [Layer 1](http://goo.gl/cEbdHQ)
 ![Layer 1](keyboard-layout-L1.png)
 
-### [Layer 2](http://goo.gl/glWmrM)
+### [Layer 2](http://goo.gl/FvFnuI)
 ![Layer 2](keyboard-layout-L2.png)
+
+### [Layer 3](http://goo.gl/HafC6A)
+![Layer 3](keyboard-layout-L3.png)
 
 ## Changelog
 
