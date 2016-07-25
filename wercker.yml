@@ -1,5 +1,5 @@
 box: 
-  id: ymotongpoo/ubuntu-trusty:wercker
+  id: edasque/qmk_firmware
 
 build:
   steps:
@@ -14,9 +14,9 @@ build:
           make clean && make keyboard=ergodox_ez keymap=$TARGET_KEYMAP
     - script:
         name: move built firmware to output dir.
-        cwd: $WERCKER_SOURCE_DIR/keyboards/ergodox_ez
+        cwd: $WERCKER_SOURCE_DIR
         code: |
-          mv ergodox_ez.hex $WERCKER_OUTPUT_DIR
+          mv ergodox_ez_$TARGET_KEYMAP.hex $WERCKER_OUTPUT_DIR
 deploy:
   steps:
     - script:
