@@ -1,0 +1,22 @@
+machine:
+  services:
+    - docker
+
+dependencies:
+  override:
+    - docker info
+    - docker build -f dockerfiles/Dockerfile.ubuntu-trusty-wercker -t ymotongpoo/ubuntu-trusty:wercker .
+
+test:  
+  override:
+    - echo "build firmware"
+    - cd $HOME/qmk_firmware/keyboard/ergodox_ez && make KEYMAP=${TARGET_KEYMAP}
+
+deployment:
+  deploy:
+    branch: master
+    commands:
+      - echo "put built hex file to bintray"
+      - curl -T $HOME/qmk_firmware/keyboard/ergodox_ez/ergodox_ez.hex -u${BINTRAY_USERNAME}:${BINTRAY_APIKEY} https://api.bintray.com/content/${BINTRAY_USERNAME}/generic/ergodox.hex/${CIRCLE_BRANCH}-circle-${CIRCLE_BUILD_NUM}/ergodox.hex
+      - echo "publish uploaded hex file"
+      - curl -X POST -u${BINTRAY_USERNAME}:${BINTRAY_APIKEY} https://api.bintray.com/content/$BINTRAY_USERNAME/generic/ergodox.hex/${CIRCLE_BRANCH}-circle-${CIRCLE_BUILD_NUM}/publish
