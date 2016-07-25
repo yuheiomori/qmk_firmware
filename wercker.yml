@@ -1,5 +1,5 @@
 box: 
-  id: edasque/qmk_firmware
+  id: ymotongpoo/qmk_firmware
 
 build:
   steps:
