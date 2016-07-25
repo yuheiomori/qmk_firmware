@@ -9,12 +9,12 @@ build:
           cat /etc/lsb-release && uname -a
     - script:
         name: build default keymap.
-        cwd: $WERCKER_SOURCE_DIR/keyboard/ergodox_ez
+        cwd: $WERCKER_SOURCE_DIR/keyboards/ergodox_ez
         code: |
           make clean && make KEYMAP=$TARGET_KEYMAP
     - script:
         name: move built firmware to output dir.
-        cwd: $WERCKER_SOURCE_DIR/keyboard/ergodox_ez
+        cwd: $WERCKER_SOURCE_DIR/keyboards/ergodox_ez
         code: |
           mv ergodox_ez.hex $WERCKER_OUTPUT_DIR
 deploy:
