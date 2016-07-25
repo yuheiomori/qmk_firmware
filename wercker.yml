@@ -12,7 +12,7 @@ build:
         name: move built firmware to output dir.
         cwd: $WERCKER_SOURCE_DIR
         code: |
-          mv ergodox_ez_$TARGET_KEYMAP.hex $WERCKER_OUTPUT_DIR
+          mv ergodox_ez_$TARGET_KEYMAP.hex $WERCKER_OUTPUT_DIR/ergodox_ez.hex
 deploy:
   steps:
     - script:
