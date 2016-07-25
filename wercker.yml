@@ -4,10 +4,6 @@ box:
 build:
   steps:
     - script:
-        name: confirm docker image version.
-        code: |
-          cat /etc/lsb-release && uname -a
-    - script:
         name: build default keymap.
         cwd: $WERCKER_SOURCE_DIR
         code: |
