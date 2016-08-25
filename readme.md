@@ -12,7 +12,7 @@ For an easy-to-read version of this document and the repository, check out [http
 * [Planck](/keyboards/planck/)
 * [Preonic](/keyboards/preonic/)
 * [Atomic](/keyboards/atomic/)
-* [ErgoDox EZ](/keyboards/ergodox_ez/)
+* [ErgoDox EZ](/keyboards/ergodox/)
 * [Clueboard](/keyboards/clueboard/)
 * [Cluepad](/keyboards/cluepad/)
 
@@ -30,7 +30,7 @@ The OLKB product firmwares are maintained by [Jack Humbert](https://github.com/j
 
 This is not a tiny project. While this is the main readme, there are many other files you might want to consult. Here are some points of interest:
 
-* The readme for your own keyboard: This is found under `keyboards/<your keyboards's name>/`. So for the ErgoDox EZ, it's [here](keyboards/ergodox_ez/); for the Planck, it's [here](keyboards/planck/) and so on.
+* The readme for your own keyboard: This is found under `keyboards/<your keyboards's name>/`. So for the ErgoDox EZ, it's [here](keyboards/ergodox/ez/); for the Planck, it's [here](keyboards/planck/) and so on.
 * The list of possible keycodes you can use in your keymap is actually spread out in a few different places:
   * [doc/keycode.txt](doc/keycode.txt) - an explanation of those same keycodes.
   * [quantum/keymap.h](quantum/keymap.h) - this is where the QMK-specific aliases are all set up. Things like the Hyper and Meh key, the Leader key, and all of the other QMK innovations. These are also explained and documented below, but `keymap.h` is where they're actually defined.
@@ -41,6 +41,29 @@ This is not a tiny project. While this is the main readme, there are many other 
 Before you are able to compile, you'll need to install an environment for AVR development. You'll find the instructions for any OS below. If you find another/better way to set things up from scratch, please consider [making a pull request](https://github.com/jackhumbert/qmk_firmware/pulls) with your changes!
 
 ## Build Environment Setup
+
+### Windows 10
+
+It's still recommended to use the method for Vista and later below. The reason for this is that the Windows 10 Subsystem for Linux lacks [USB support](https://wpdev.uservoice.com/forums/266908-command-prompt-console-bash-on-ubuntu-on-windo/suggestions/13355724-unable-to-access-usb-devices-from-bash), so it's not possible to flash the firmware to the keyboard. Please add your vote to the link!
+
+That said, it's still possible to use it for compilation. And recommended, if you need to compile much, since it's much faster than at least Cygwin (which is also supported, but currently lacking documentation). I haven't tried the method below, so I'm unable to tell.
+
+Here are the steps
+
+1. Install the Windows 10 subsystem for Linux, following [these instructions](http://www.howtogeek.com/249966/how-to-install-and-use-the-linux-bash-shell-on-windows-10/).
+2. If you have previously cloned the repository using the normal Git bash, you will need to clean up the line endings. If you have cloned it after 20th of August 2016, you are likely fine. To clean up the line endings do the following
+   1. Make sure that you have no changes you haven't committed by running `git status`, if you do commit them first
+   2. From within the Git bash run ´git rm --cached -r .`
+   3. Followed by `git reset --hard`
+3. Start the "Bash On Ubuntu On Windows" from the start menu
+4. With the bash open, navigate to your git checkout. The harddisk can be accessed from `/mnt` for example `/mnt/c` for the `c:\` drive.
+5. Run `sudo util/install_dependencies.sh`. 
+6. After a while the installation will finish, and you are good to go
+
+**Note** From time to time, the dependencies might change, so just run `install_dependencies.sh` again if things are not working.
+
+**Warning:** If you edit Makefiles or shell scripts, make sure you are using an editor that saves the files with Unix line endings. Otherwise the compilation might not work.
+
 
 ### Windows (Vista and later)
 1. If you have ever installed WinAVR, uninstall it.
@@ -67,12 +90,36 @@ You can also try these instructions:
 3. Install [DFU-Programmer][dfu-prog].
 
 ### Linux
-Install AVR GCC, AVR libc, and dfu-progammer with your favorite package manager.
+
+To ensure you are always up to date, you can just run `sudo utils/install_dependencies.sh`. That should always install all the dependencies needed. 
+
+You can also install things manually, but this documentation might not be always up to date with all requirements.
+
+The current requirements are the following, but not all might be needed depending on what you do. Also note that some systems might not have all the dependencies available as packages, or they might be named differently.
+
+```
+build-essential
+gcc
+unzip
+wget
+zip
+gcc-avr
+binutils-avr
+avr-libc
+dfu-programmer
+dfu-util
+gcc-arm-none-eabi
+binutils-arm-none-eabi
+libnewlib-arm-none-eabi
+git
+```
+
+Install the dependencies with your favorite package manager.
 
 Debian/Ubuntu example:
 
     sudo apt-get update
-    sudo apt-get install gcc-avr avr-libc dfu-programmer
+    sudo apt-get install gcc unzip wget zip gcc-avr binutils-avr avr-libc dfu-programmer dfu-util gcc-arm-none-eabi binutils-arm-none-eabi libnewlib-arm-none-eabi
 
 ### Docker
 
@@ -81,9 +128,9 @@ If this is a bit complex for you, Docker might be the turn-key solution you need
 ```bash
 # You'll run this every time you want to build a keymap
 # modify the keymap and keyboard assigment to compile what you want
-# defaults are ergodox_ez/default
+# defaults are ergodox/default
 
-docker run -e keymap=gwen -e keyboard=ergodox_ez --rm -v $('pwd'):/qmk:rw edasque/qmk_firmware
+docker run -e keymap=gwen -e keyboard=ergodox --rm -v $('pwd'):/qmk:rw edasque/qmk_firmware
 
 ```
 
@@ -121,17 +168,16 @@ Below are some definitions that will be useful:
 
 Below is a list of the useful `make` commands in QMK:
 
-* `make` - cleans automatically and builds your keyboard and keymap depending on which folder you're in. This defaults to the "default" layout (unless in a keymap folder), and Planck keyboard in the root folder
+* `make` - builds your keyboard and keymap depending on which folder you're in. This defaults to the "default" layout (unless in a keymap folder), and Planck keyboard in the root folder
   * `make keyboard=<keyboard>` - specifies the keyboard (only to be used in root)
   * `make keymap=<keymap>` - specifies the keymap (only to be used in root and keyboard folder - not needed when in keymap folder)
-* `make quick` - skips the clean step (cannot be used immediately after modifying config.h or Makefiles)
+* `make clean` - cleans the `.build` folder, ensuring that everything is re-built
 * `make dfu` - (requires dfu-programmer) builds and flashes the keymap to your keyboard once placed in reset/dfu mode (button or press `KC_RESET`). This does not work for Teensy-based keyboards like the ErgoDox EZ.
   * `keyboard=` and `keymap=` are compatible with this
 * `make all-keyboards` - builds all keymaps for all keyboards and outputs status of each (use in root)
 * `make all-keyboards-default` - builds all default keymaps for all keyboards and outputs status of each (use in root)
 * `make all-keymaps [keyboard=<keyboard>]` - builds all of the keymaps for whatever keyboard folder you're in, or specified by `<keyboard>`
-* `make all-keyboards-quick`, `make all-keyboards-default-quick` and `make all-keymaps-quick [keyboard=<keyboard>]` - like the normal "make-all-*" commands, but they skip the clean steps
-
+* `make all-keyboards-*`, `make all-keyboards-default-*` and `make all-keymaps-* [keyboard=<keyboard>]` - like the normal "make-all-*" commands, but the last string aftter the `-` (for example clean) is passed to the keyboard make command.
 Other, less useful functionality:
 
 * `make COLOR=false` - turns off color output
@@ -228,9 +274,17 @@ For a value of `4` for this imaginary setting. So we `undef` it first, then `def
 
 You can then override any settings, rather than having to copy and paste the whole thing.
 
-## Going beyond the keycodes
+# Going beyond the keycodes
 
 Aside from the [basic keycodes](doc/keycode.txt), your keymap can include shortcuts to common operations.
+
+## Quick aliases to common actions
+
+Your keymap can include shortcuts to common operations (called "function actions" in tmk).
+
+These functions work the same way that their `ACTION_*` functions do - they're just quick aliases. To dig into all of the tmk `ACTION_*` functions, please see the [TMK documentation](https://github.com/jackhumbert/qmk_firmware/blob/master/doc/keymap.md#2-action).
+
+Instead of using `FNx` when defining `ACTION_*` functions, you can use `F(x)` - the benefit here is being able to use more than 32 function actions (up to 4096), if you happen to need them.
 
 ### Switching and toggling layers
 
@@ -309,7 +363,7 @@ We've added shortcuts to make common modifier/tap (mod-tap) mappings more compac
   * `LCAG_T(kc)` - is CtrlAltGui when held and *kc* when tapped
   * `MEH_T(kc)` - is like Hyper, but not as cool -- does not include the Cmd/Win key, so just sends Alt+Ctrl+Shift.
 
-### Space Cadet Shift: The future, built in
+## Space Cadet Shift: The future, built in
 
 Steve Losh [described](http://stevelosh.com/blog/2012/10/a-modern-space-cadet/) the Space Cadet Shift quite well. Essentially, you hit the left Shift on its own, and you get an opening parenthesis; hit the right Shift on its own, and you get the closing one. When hit with other keys, the Shift key keeps working as it always does. Yes, it's as cool as it sounds.
 
@@ -334,7 +388,7 @@ COMMAND_ENABLE   = no  # Commands for debug and configuration
 
 This is just to keep the keyboard from going into command mode when you hold both Shift keys at the same time.
 
-### The Leader key: A new kind of modifier
+## The Leader key: A new kind of modifier
 
 If you've ever used Vim, you know what a Leader key is. If not, you're about to discover a wonderful concept. :) Instead of hitting Alt+Shift+W for example (holding down three keys at the same time), what if you could hit a _sequence_ of keys instead? So you'd hit our special modifier (the Leader key), followed by W and then C (just a rapid succession of keys), and something would happen.
 
@@ -372,7 +426,7 @@ void matrix_scan_user(void) {
 
 As you can see, you have three function. you can use - `SEQ_ONE_KEY` for single-key sequences (Leader followed by just one key), and `SEQ_TWO_KEYS` and `SEQ_THREE_KEYS` for longer sequences. Each of these accepts one or more keycodes as arguments. This is an important point: You can use keycodes from **any layer on your keyboard**. That layer would need to be active for the leader macro to fire, obviously.
 
-### Tap Dance: A single key can do 3, 5, or 100 different things
+## Tap Dance: A single key can do 3, 5, or 100 different things
 
 Hit the semicolon key once, send a semicolon. Hit it twice, rapidly -- send a colon. Hit it three times, and your keyboard's LEDs do a wild dance. That's just one example of what Tap Dance can do. It's one of the nicest community-contributed features in the firmware, conceived and created by [algernon](https://github.com/algernon) in [#451](https://github.com/jackhumbert/qmk_firmware/pull/451). Here's how algernon describes the feature:
 
@@ -408,7 +462,32 @@ Our next stop is `matrix_scan_tap_dance()`. This handles the timeout of tap-danc
 
 For the sake of flexibility, tap-dance actions can be either a pair of keycodes, or a user function. The latter allows one to handle higher tap counts, or do extra things, like blink the LEDs, fiddle with the backlighting, and so on. This is accomplished by using an union, and some clever macros.
 
-In the end, let's see a full example!
+### Examples
+
+Here's a simple example for a single definition: 
+
+1. In your `makefile`, add `TAP_DANCE_ENABLE = yes`
+2. In your `config.h` (which you can copy from `qmk_firmware/keyboards/planck/config.h` to your keymap directory), add `#define TAPPING_TERM 200`
+3. In your `keymap.c` file, define the variables and definitions, then add to your keymap: 
+
+```c
+//Tap Dance Declarations
+enum {
+  TD_ESC_CAPS = 0
+};
+
+//Tap Dance Definitions
+qk_tap_dance_action_t tap_dance_actions[] = {
+  //Tap once for Esc, twice for Caps Lock
+  [TD_ESC_CAPS]  = ACTION_TAP_DANCE_DOUBLE(KC_ESC, KC_CAPS)
+// Other declarations would go here, separated by commas, if you have them
+};
+
+//In Layer declaration, add tap dance item in place of a key code
+TD(TD_ESC_CAPS) 
+```
+
+Here's a more complex example involving custom actions: 
 
 ```c
 enum {
@@ -484,7 +563,7 @@ void dance_flsh_reset(qk_tap_dance_state_t *state, void *user_data) {
   ergodox_right_led_3_off();
 }
 
-const qk_tap_dance_action_t tap_dance_actions[] = {
+qk_tap_dance_action_t tap_dance_actions[] = {
   [CT_SE]  = ACTION_TAP_DANCE_DOUBLE (KC_SPC, KC_ENT)
  ,[CT_CLN] = ACTION_TAP_DANCE_FN_ADVANCED (NULL, dance_cln_finished, dance_cln_reset)
  ,[CT_EGG] = ACTION_TAP_DANCE_FN (dance_egg)
@@ -492,11 +571,11 @@ const qk_tap_dance_action_t tap_dance_actions[] = {
 };
 ```
 
-### Temporarily setting the default layer
+## Temporarily setting the default layer
 
 `DF(layer)` - sets default layer to *layer*. The default layer is the one at the "bottom" of the layer stack - the ultimate fallback layer. This currently does not persist over power loss. When you plug the keyboard back in, layer 0 will always be the default. It is theoretically possible to work around that, but that's not what `DF` does.
 
-### Prevent stuck modifiers
+## Prevent stuck modifiers
 
 Consider the following scenario:
 
@@ -516,12 +595,6 @@ If such situation bothers you add this to your `config.h`:
 This option uses 5 bytes of memory per every 8 keys on the keyboard
 rounded up (5 bits per key). For example on Planck (48 keys) it uses
 (48/8)\*5 = 30 bytes.
-
-### Remember: These are just aliases
-
-These functions work the same way that their `ACTION_*` functions do - they're just quick aliases. To dig into all of the tmk ACTION_* functions, please see the [TMK documentation](https://github.com/jackhumbert/qmk_firmware/blob/master/doc/keymap.md#2-action).
-
-Instead of using `FNx` when defining `ACTION_*` functions, you can use `F(x)` - the benefit here is being able to use more than 32 function actions (up to 4096), if you happen to need them.
 
 ## Macro shortcuts: Send a whole string when pressing just one key
 
@@ -668,6 +741,53 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 
 And then, to assign this macro to a key on your keyboard layout, you just use `M(0)` on the key you want to press for copy/paste.
 
+## Dynamic macros: record and replay macros in runtime
+
+In addition to the static macros described above, you may enable the dynamic macros which you may record while writing. They are forgotten as soon as the keyboard is unplugged. Only two such macros may be stored at the same time, with the total length of 128 keypresses.
+
+To enable them, first add a new element to the `planck_keycodes` enum -- `DYNAMIC_MACRO_RANGE`:
+
+    enum planck_keycodes {
+      QWERTY = SAFE_RANGE,
+      COLEMAK,
+      DVORAK,
+      PLOVER,
+      LOWER,
+      RAISE,
+      BACKLIT,
+      EXT_PLV,
+      DYNAMIC_MACRO_RANGE,
+    };
+
+Afterwards create a new layer called `_DYN`:
+
+    #define _DYN 6    /* almost any other free number should be ok */
+    
+Below these two modifications include the `dynamic_macro.h` header:
+
+    #include "dynamic_macro.h"`
+    
+Then define the `_DYN` layer with the following keys: `DYN_REC_START1`, `DYN_MACRO_PLAY1`,`DYN_REC_START2` and `DYN_MACRO_PLAY2`. It may also contain other keys, it doesn't matter apart from the fact that you won't be able to record these keys in the dynamic macros.
+
+    [_DYN]= {
+        {_______,  DYN_REC_START1, DYN_MACRO_PLAY1, _______, _______, _______, _______, _______, _______, _______, _______, _______},
+        {_______,  DYN_REC_START2, DYN_MACRO_PLAY2, _______, _______, _______, _______, _______, _______, _______, _______, _______},
+        {_______,  _______,        _______,         _______, _______, _______, _______, _______, _______, _______, _______, _______},
+        {_______,  _______,        _______,         _______, _______, _______, _______, _______, _______, _______, _______, _______}
+    },
+    
+Add the following code to the very beginning of your `process_record_user()` function:
+
+    if (!process_record_dynamic_macro(keycode, record)) {
+        return false;
+    }
+
+To start recording the macro, press either `DYN_REC_START1` or `DYN_REC_START2`. To finish the recording, press the `_DYN` layer button. The handler awaits specifically for the `MO(_DYN)` keycode as the "stop signal" so please don't use any fancy ways to access this layer, use the regular `MO()` modifier. To replay the macro, press either `DYN_MACRO_PLAY1` or `DYN_MACRO_PLAY2`.
+
+If the LED-s start blinking during the recording with each keypress, it means there is no more space for the macro in the macro buffer. To fit the macro in, either make the other macro shorter (they share the same buffer) or increase the buffer size by setting the `DYNAMIC_MACRO_SIZE` preprocessor macro (default value: 256; please read the comments for it in the header).
+
+For the details about the internals of the dynamic macros, please read the comments in the `dynamic_macro.h` header.
+
 ## Additional keycode aliases for software-implemented layouts (Colemak, Dvorak, etc)
 
 Everything is assuming you're in Qwerty (in software) by default, but there is built-in support for using a Colemak or Dvorak layout by including this at the top of your keymap:
@@ -709,7 +829,7 @@ Enable the backlight from the Makefile.
 
 All of these functions are available in the `*_kb()` or `*_user()` variety. `kb` ones should only be used in the `<keyboard>/<keyboard>.c` file, and `user` ones should only be used in the `keymap.c`. The keyboard ones call the user ones - it's necessary to keep these calls to allow the keymap functions to work correctly.
 
-## `void martix_init_*(void)`
+## `void matrix_init_*(void)`
 
 This function gets called when the matrix is initiated, and can contain start-up code for your keyboard/keymap.
 
