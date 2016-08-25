@@ -34,7 +34,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 // If it accepts an argument (i.e, is a function), it doesn't need KC_.
 // Otherwise, it needs KC_*
-[OSX] = KEYMAP(  // layer 0 : default
+[OSX] = KEYMAP( // layer 0 : default
         // left hand
         KC_EQL,         KC_1,         KC_2,        KC_3,      KC_4,   KC_5,   KC_GRV,
         KC_TAB,         KC_Q,         KC_W,        KC_E,      KC_R,   KC_T,   LGUI(KC_LEFT),
@@ -53,7 +53,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              KC_LALT,        KC_ESC,
              KC_PGUP,
              KC_PGDN,KC_ENT, KC_SPC
-    ),
+    ),]
 
 /* Keymap 1: Windows layer
  *
@@ -116,7 +116,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                        |      |      |       |      | Mute |
  *                                 ,------|------|------|       |------+------+------.
  *                                 |      |      |      |       |      |      |      |
- *                                 |C+S+A |A+Ent |------|       |------| Vol- | Vol+ |
+ *                                 |⌘+S+A |A+Ent |------|       |------| Vol- | Vol+ |
  *                                 |      |      |      |       |      |      |      |
  *                                 `--------------------'       `--------------------'
  */
@@ -133,7 +133,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_TRNS,     KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS,
                                                             KC_TRNS, KC_TRNS,
                                                                      KC_TRNS,
-                                     LCTL(LSFT(KC_A)), LALT(KC_ENT), KC_TRNS,
+                                      LGU(LSFT(KC_A)), LALT(KC_ENT), KC_TRNS,
        // right hand
        KC_F7,     KC_F8,   KC_F9,  KC_F10,  KC_F11,  KC_F12,  KC_TRNS,
        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,
