@@ -53,7 +53,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              KC_LALT,        KC_ESC,
              KC_PGUP,
              KC_PGDN,KC_ENT, KC_SPC
-    ),]
+    ),
 
 /* Keymap 1: Windows layer
  *
