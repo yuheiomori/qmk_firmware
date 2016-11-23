@@ -12,10 +12,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,--------------------------------------------------.           ,--------------------------------------------------.
  * | ESC    |   1  |   2  |   3  |   4  |   5  |      |           |      |   6  |   7  |   8  |   9  |   0  |   =    |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * | Tab    |   Q  |   W  |   E  |   R  |   T  | App  |           |      |   Y  |   U  |   I  |   O  |   P  |   -    |
+ * | Tab    |   Q  |   W  |   E  |   R  |   T  |Window|           |      |   Y  |   U  |   I  |   O  |   P  |   -    |
  * |--------+------+------+------+------+------|Switch|           |      |------+------+------+------+------+--------|
  * | CTRL   |   A  |   S  |   D  |   F  |   G  |------|           |------|   H  |   J  |  K   |   L  |   ;  | '"/GUI |
- * |--------+------+------+------+------+------|Window|           | Meh  |------+------+------+------+------+--------|
+ * |--------+------+------+------+------+------| App  |           | Meh  |------+------+------+------+------+--------|
  * | LShift |Z/Ctrl|   X  |   C  |   V  |   B  |Switch|           |      |   N  |   M  |   ,  |   .  |//Ctrl|\/Shift |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
  *   | cut  | paste| copy | Alt  | LGUI |                                       | RGUI |      | [    | ]    | `~   |
@@ -34,9 +34,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [BASE] = KEYMAP(
         // left hand
         KC_ESC,         KC_1,         KC_2,       KC_3,    KC_4,   KC_5,   KC_NO,
-        KC_TAB,         KC_Q,         KC_W,       KC_E,    KC_R,   KC_T,   LGUI(KC_TAB),
+        KC_TAB,         KC_Q,         KC_W,       KC_E,    KC_R,   KC_T,   LGUI(KC_GRV),
         KC_LCTL,        KC_A,         KC_S,       KC_D,    KC_F,   KC_G,
-        KC_LSFT,        CTL_T(KC_Z),  KC_X,       KC_C,    KC_V,   KC_B,   LGUI(KC_GRV),
+        KC_LSFT,        CTL_T(KC_Z),  KC_X,       KC_C,    KC_V,   KC_B,   LGUI(KC_TAB),
         LGUI(KC_X),     LGUI(KC_V),   LGUI(KC_C), KC_LALT, KC_LGUI,
                                                   KC_NO,   KC_NO,
                                                            KC_HOME,
