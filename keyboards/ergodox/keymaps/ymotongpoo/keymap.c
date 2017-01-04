@@ -174,7 +174,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [WINFN] = KEYMAP(
        // left hand
        KC_TRNS,       KC_F1,         KC_F2,       KC_F3,               KC_F4,                KC_F5,   KC_F6,
-       KC_TRNS,       KC_TRNS,       KC_TRNS,     LGUI(LCTL(KC_LEFT),  LGUI(LCTL(KC_RIGHT)), KC_TRNS, KC_TRNS,
+       KC_TRNS,       KC_TRNS,       KC_TRNS,     LGUI(LCTL(KC_LEFT)), LGUI(LCTL(KC_RIGHT)), KC_TRNS, KC_TRNS,
        KC_TRNS,       KC_TRNS,       KC_TRNS,     LGUI(KC_D),          KC_TRNS,              KC_TRNS,
        KC_TRNS,       KC_TRNS,       KC_TRNS,     KC_TRNS,             KC_TRNS,              KC_TRNS, KC_TRNS,
        LGUI(KC_LEFT), LGUI(KC_DOWN), LGUI(KC_UP), LGUI(KC_RIGHT),      KC_TRNS,
