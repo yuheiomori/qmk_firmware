@@ -226,7 +226,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                      KC_SPC, KC_ENT, KC_TRNS,
        // right hand
        KC_F7,           KC_F8,   KC_F9,  KC_F10,  KC_F11,  KC_F12,  KC_TRNS,
-       TO(OSX,1),     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,
+       TO(MAC,1),     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,
                       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,
        TO(WINDOWS,1), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,
                       KC_ACL2, KC_ACL1, KC_ACL0, KC_TRNS,  KC_TRNS,
@@ -279,13 +279,24 @@ void matrix_scan_user(void) {
     ergodox_right_led_3_off();
     switch (layer) {
       // TODO: Make this relevant to the ErgoDox EZ.
-        case OSX:
+        case MAC:
             ergodox_right_led_1_on();
+            ergodox_right_led_2_off();
+            ergodox_right_led_3_off();
             break;
         case WINDOWS:
+            ergodox_right_led_1_off();
             ergodox_right_led_2_on();
+            ergodox_right_led_3_off();
             break;
-        case FN:
+        case MACFN:
+            ergodox_right_led_1_on();
+            ergodox_right_led_2_off();
+            ergodox_right_led_3_on();
+            break;
+        case WINFN:
+            ergodox_right_led_1_off();
+            ergodox_right_led_2_on();
             ergodox_right_led_3_on();
             break;
         case MOUSE:
