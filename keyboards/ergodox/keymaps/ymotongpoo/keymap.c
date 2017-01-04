@@ -237,7 +237,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 const uint16_t PROGMEM fn_actions[] = {
-    [1] = ACTION_LAYER_TAP_TOGGLE(FN)                // FN1 - Momentary Layer 1 (functions)
+    [1] = ACTION_LAYER_TAP_TOGGLE(MACFN),
+    [2] = ACTION_LAYER_TAP_TOGGLE(WINFN)               // FN1,2 - Momentary Layer 1,2 (functions)
 };
 
 const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
