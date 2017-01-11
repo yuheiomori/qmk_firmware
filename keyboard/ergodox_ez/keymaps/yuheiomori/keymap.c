@@ -2,12 +2,13 @@
 #include "debug.h"
 #include "action_layer.h"
 
-#define BASE 0 // default layer
-#define SYMB 1 // symbols
-#define MDIA 2 // media keys
+#define MAC 0 // default layer
+#define UBUNTU 1
+#define SYMB 2 // symbols
+#define MDIA 3 // media keys
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-/* Keymap 0: Basic layer
+/* Keymap 0: Mac
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
  * | ESC    |   1  |   2  |   3  |   4  |   5  |      |           |      |   6  |   7  |   8  |   9  |   0  |   =    |
@@ -31,7 +32,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // If it accepts an argument (i.e, is a function), it doesn't need KC_.
 // Otherwise, it needs KC_*
 // Hyper ALL_T(KC_NO)-_\|'"'"=+
-[BASE] = KEYMAP(
+[MAC] = KEYMAP(
         // left hand
         KC_ESC,         KC_1,         KC_2,       KC_3,    KC_4,   KC_5,   KC_NO,
         KC_TAB,         KC_Q,         KC_W,       KC_E,    KC_R,   KC_T,   KC_NO,
@@ -46,13 +47,61 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO,          KC_6,         KC_7,       KC_8,    KC_9,    KC_0,             KC_EQL,
         RESET,          KC_Y,         KC_U,       KC_I,    KC_O,    KC_P,             KC_MINS,
         KC_H,           KC_J,         KC_K,       KC_L,    LT(MDIA, KC_SCLN),         GUI_T(KC_QUOT),
-        MO(SYMB),       KC_N,         KC_M,       KC_COMM, KC_DOT,  CTL_T(KC_SLSH),   SFT_T(KC_BSLS),
+        MO(UBUNTU),       KC_N,         KC_M,       KC_COMM, KC_DOT,  CTL_T(KC_SLSH),   SFT_T(KC_BSLS),
         KC_RGUI,        KC_NO,        KC_LBRC,    KC_RBRC,          KC_GRV,
                                                   KC_LEFT, KC_RGHT,
                                                   KC_UP,
-                                                  KC_DOWN, KC_NO ,  KC_ENT    
+                                                  KC_DOWN, KC_NO ,  KC_ENT
     ),
-    
+
+
+/* Keymap 1: UBUNTU
+ *
+ * ,--------------------------------------------------.           ,--------------------------------------------------.
+ * | ESC    |   1  |   2  |   3  |   4  |   5  |      |           |      |   6  |   7  |   8  |   9  |   0  |   =    |
+ * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
+ * | Tab    |   Q  |   W  |   E  |   R  |   T  |      |           |Reset |   Y  |   U  |   I  |   O  |   P  |   -    |
+ * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+ * | CTRL   |   A  |   S  |   D  |   F  |   G  |------|           |------|   H  |   J  |  K   |   L  |   ;  | '"     |
+ * |--------+------+------+------+------+------|      |           |LMac  |------+------+------+------+------+--------|
+ * | LShift |Z/Ctrl|   X  |   C  |   V  |   B  |      |           |      |   N  |   M  |   ,  |   .  |//Ctrl|\/Shift |
+ * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
+ *   | cut  | paste| copy | Alt  | LGUI |                                       | RGUI |      | [    | ]    | `~   |
+ *   `----------------------------------'                                       `----------------------------------'
+ *                                        ,-------------.       ,-------------.
+ *                                        |<-tab |tab-> |       | left |right |
+ *                                 ,------|------|------|       |------+--------+------.
+ *                                 |      |      | home |       | Up   |        |      |
+ *                                 |Space |Bask  |----- |       |----- |        |Enter |
+ *                                 |      |Space | End  |       | Down |        |      |
+ *                                 `--------------------'       `----------------------'
+ */
+
+[UBUNTU] = KEYMAP(
+        // left hand
+        KC_ESC,         KC_1,         KC_2,       KC_3,    KC_4,   KC_5,   KC_NO,
+        KC_TAB,         KC_Q,         KC_W,       KC_E,    KC_R,   KC_T,   KC_NO,
+        KC_LCTL,        KC_A,         KC_S,       KC_D,    KC_F,   KC_G,
+        KC_LSFT,        KC_Z,         KC_X,       KC_C,    KC_V,   KC_B,   KC_NO,
+        LCTRL(KC_X),    LCTRL(KC_V),  LCTRL(KC_C), KC_LALT, KC_LGUI,
+                                                  LSFT(LCTL(KC_TAB)),   LCTL(KC_TAB),
+                                                           KC_HOME,
+                                                  KC_SPC,  KC_BSPC, KC_END,
+
+        // right hand
+        KC_NO,          KC_6,         KC_7,       KC_8,    KC_9,    KC_0,             KC_EQL,
+        RESET,          KC_Y,         KC_U,       KC_I,    KC_O,    KC_P,             KC_MINS,
+                        KC_H,         KC_J,       KC_K,    KC_L,    KC_SCLN,          KC_QUOT,
+        MO(MAC),        KC_N,         KC_M,       KC_COMM, KC_DOT,  KC_SLSH,          KC_BSLS,
+        KC_NO,          KC_NO,        KC_LBRC,    KC_RBRC,          KC_GRV,
+                                                  KC_LEFT, KC_RGHT,
+                                                  KC_UP,
+                                                  KC_DOWN, KC_NO ,  KC_ENT
+    ),
+
+
+
+
 /* Keymap 1: Symbol Layer
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
@@ -64,7 +113,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * | LShift |   %  |   ^  |   [  |   ]  |   ~  |      |           |      | End  | PgDn | Down |      |      |        |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   |      |      |      | ALT  | LGui |                                       |      |      |      |      |LBase  |
+ *   |      |      |      | ALT  | LGui |                                       |      |      |      |      |LMac  |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
  *                                        |      |      |       |      | Mute |
@@ -90,7 +139,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_TRNS, KC_TRNS, KC_TRNS, KC_UP,    KC_TRNS,  KC_TRNS, KC_TRNS,
                 KC_HOME, KC_PGUP, KC_LEFT,  KC_RGHT,  KC_TRNS, KC_TRNS,
        KC_TRNS, KC_END,  KC_PGDN, KC_DOWN,  KC_TRNS,  KC_TRNS, KC_TRNS,
-                         KC_TRNS, KC_TRNS,  KC_TRNS,  KC_TRNS, MO(BASE),
+                         KC_TRNS, KC_TRNS,  KC_TRNS,  KC_TRNS, MO(MAC),
        KC_TRNS, KC_MUTE,
        KC_TRNS,
        KC_TRNS, KC_VOLD, KC_VOLU
@@ -173,10 +222,10 @@ void matrix_scan_user(void) {
     ergodox_right_led_3_off();
     switch (layer) {
       // TODO: Make this relevant to the ErgoDox EZ.
-        case 1:
+        case MAC:
             ergodox_right_led_1_on();
             break;
-        case 2:
+        case UBUNTU:
             ergodox_right_led_2_on();
             break;
         default:
