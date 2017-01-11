@@ -21,7 +21,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *   | cut  | paste| copy | Alt  | LGUI |                                       | RGUI |      | [    | ]    | `~   |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
- *                                        |      |      |       | left |right |
+ *                                        |<-tab |tab-> |       | left |right |
  *                                 ,------|------|------|       |------+--------+------.
  *                                 |      |      | home |       | Up   |        |      |
  *                                 |Space |Bask  |----- |       |----- |        |Enter |
