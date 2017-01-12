@@ -66,7 +66,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|      |           |LMac  |------+------+------+------+------+--------|
  * | LShift |Z/Ctrl|   X  |   C  |   V  |   B  |      |           |      |   N  |   M  |   ,  |   .  |//Ctrl|\/Shift |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   | cut  | paste| copy | Alt  | LGUI |                                       | RGUI |      | [    | ]    | `~   |
+ *   | cut  | paste| copy | super| alt  |                                       | Kana |      | [    | ]    | `~   |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
  *                                        |<-tab |tab-> |       | left |right |
@@ -83,7 +83,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,         KC_Q,         KC_W,       KC_E,    KC_R,   KC_T,   KC_NO,
         KC_LCTL,        KC_A,         KC_S,       KC_D,    KC_F,   KC_G,
         KC_LSFT,        KC_Z,         KC_X,       KC_C,    KC_V,   KC_B,   KC_NO,
-        LCTL(KC_X),     LCTL(KC_V),   LCTL(KC_C), KC_LALT, KC_LGUI,
+        LCTL(KC_X),     LCTL(KC_V),   LCTL(KC_C), KC_LGUI, KC_LALT,
                                                   LSFT(LCTL(KC_TAB)),   LCTL(KC_TAB),
                                                            KC_HOME,
                                                   KC_SPC,  KC_BSPC, KC_END,
@@ -92,8 +92,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO,          KC_6,         KC_7,       KC_8,    KC_9,    KC_0,             KC_EQL,
         RESET,          KC_Y,         KC_U,       KC_I,    KC_O,    KC_P,             KC_MINS,
                         KC_H,         KC_J,       KC_K,    KC_L,    KC_SCLN,          KC_QUOT,
-        TO(MAC, 1),        KC_N,         KC_M,       KC_COMM, KC_DOT,  KC_SLSH,          KC_BSLS,
-        KC_NO,          KC_NO,        KC_LBRC,    KC_RBRC,          KC_GRV,
+        TO(MAC, 1),     KC_N,         KC_M,       KC_COMM, KC_DOT,  KC_SLSH,          KC_BSLS,
+        LGUI(KC_SPC),   KC_NO,        KC_LBRC,    KC_RBRC,          KC_GRV,
                                                   KC_LEFT, KC_RGHT,
                                                   KC_UP,
                                                   KC_DOWN, KC_NO ,  KC_ENT
