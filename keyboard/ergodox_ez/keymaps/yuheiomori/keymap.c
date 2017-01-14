@@ -93,7 +93,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         RESET,          KC_Y,         KC_U,       KC_I,    KC_O,    KC_P,             KC_MINS,
                         KC_H,         KC_J,       KC_K,    KC_L,    KC_SCLN,          KC_QUOT,
         TO(MAC, 1),     KC_N,         KC_M,       KC_COMM, KC_DOT,  KC_SLSH,          KC_BSLS,
-        KC_LALT,        KC_F24,       KC_LBRC,    KC_RBRC,          KC_NO,
+        KC_LALT,        KC_APP,       KC_LBRC,    KC_RBRC,          KC_NO,
                                                   KC_LEFT, KC_RGHT,
                                                   KC_UP,
                                                   KC_DOWN, KC_NO ,  KC_ENT
