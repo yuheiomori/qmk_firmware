@@ -2,60 +2,14 @@
 #include "debug.h"
 #include "action_layer.h"
 
-#define MAC 0 // default layer
-#define UBUNTU 1
+#define UBUNTU 0 // default layer
+#define MAC 1
 #define SYMB 2 // symbols
 #define MDIA 3 // media keys
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-/* Keymap 0: Mac
- *
- * ,--------------------------------------------------.           ,--------------------------------------------------.
- * | ESC    |   1  |   2  |   3  |   4  |   5  |      |           |      |   6  |   7  |   8  |   9  |   0  |   =    |
- * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * | Tab    |   Q  |   W  |   E  |   R  |   T  |      |           |Reset |   Y  |   U  |   I  |   O  |   P  |   -    |
- * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * | CTRL   |   A  |   S  |   D  |   F  |   G  |------|           |------|   H  |   J  |  K   |   L  |   ;  | '"/GUI |
- * |--------+------+------+------+------+------|Window|           |LSymb |------+------+------+------+------+--------|
- * | LShift |Z/Ctrl|   X  |   C  |   V  |   B  |Switch|           |      |   N  |   M  |   ,  |   .  |//Ctrl|\/Shift |
- * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   | cut  | paste| copy | Alt  | LGUI |                                       | RGUI |      | [    | ]    | `~   |
- *   `----------------------------------'                                       `----------------------------------'
- *                                        ,-------------.       ,-------------.
- *                                        |<-tab |tab-> |       | left |right |
- *                                 ,------|------|------|       |------+--------+------.
- *                                 |      |      | home |       | Up   |        |      |
- *                                 |Space |Bask  |----- |       |----- |        |Enter |
- *                                 |      |Space | End  |       | Down |        |      |
- *                                 `--------------------'       `----------------------'
- */
-// If it accepts an argument (i.e, is a function), it doesn't need KC_.
-// Otherwise, it needs KC_*
-// Hyper ALL_T(KC_NO)-_\|'"'"=+
-[MAC] = KEYMAP(
-        // left hand
-        KC_ESC,         KC_1,         KC_2,       KC_3,    KC_4,   KC_5,   KC_NO,
-        KC_TAB,         KC_Q,         KC_W,       KC_E,    KC_R,   KC_T,   KC_NO,
-        KC_LCTL,        KC_A,         KC_S,       KC_D,    KC_F,   KC_G,
-        KC_LSFT,        CTL_T(KC_Z),  KC_X,       KC_C,    KC_V,   KC_B,   LGUI(KC_GRV),
-        LGUI(KC_X),     LGUI(KC_V),   LGUI(KC_C), KC_LALT, KC_LGUI,
-                                                  LSFT(LCTL(KC_TAB)),   LCTL(KC_TAB),
-                                                           KC_HOME,
-                                                  KC_SPC,  KC_BSPC, KC_END,
 
-        // right hand
-        KC_NO,          KC_6,         KC_7,       KC_8,    KC_9,    KC_0,             KC_EQL,
-        RESET,          KC_Y,         KC_U,       KC_I,    KC_O,    KC_P,             KC_MINS,
-                        KC_H,         KC_J,       KC_K,    KC_L,    LT(MDIA, KC_SCLN),         GUI_T(KC_QUOT),
-        TO(UBUNTU,1),     KC_N,         KC_M,       KC_COMM, KC_DOT,  CTL_T(KC_SLSH),   SFT_T(KC_BSLS),
-        KC_RGUI,        KC_NO,        KC_LBRC,    KC_RBRC,          KC_GRV,
-                                                  KC_LEFT, KC_RGHT,
-                                                  KC_UP,
-                                                  KC_DOWN, KC_NO ,  KC_ENT
-    ),
-
-
-/* Keymap 1: UBUNTU
+/* Keymap 0: UBUNTU
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
  * | ESC    |   1  |   2  |   3  |   4  |   5  | `~   |           | `~   |   6  |   7  |   8  |   9  |   0  |   =    |
@@ -63,10 +17,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * | Tab    |   Q  |   W  |   E  |   R  |   T  |      |           |Reset |   Y  |   U  |   I  |   O  |   P  |   -    |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * | CTRL   |   A  |   S  |   D  |   F  |   G  |------|           |------|   H  |   J  |  K   |   L  |   ;  | '"     |
- * |--------+------+------+------+------+------|      |           |LMac  |------+------+------+------+------+--------|
+ * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * | LShift |   Z  |   X  |   C  |   V  |   B  |      |           |      |   N  |   M  |   ,  |   .  |   /  |  \     |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   | cut  | paste| copy | super| alt  |                                       | alt  | ctx  | [    | ]    |      |
+ *   | cut  | paste| copy | super| alt  |                                       | alt  | ctx  | [    | ]    |LMac  |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,---------------.
  *                                        |<-tab |tab-> |       | left |right   |
@@ -76,7 +30,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                 |      |Space | End  |       | Down |        |      |
  *                                 `--------------------'       `----------------------'
  */
-
+// If it accepts an argument (i.e, is a function), it doesn't need KC_.
+// Otherwise, it needs KC_*
+// Hyper ALL_T(KC_NO)
 [UBUNTU] = KEYMAP(
         // left hand
         KC_ESC,         KC_1,         KC_2,       KC_3,    KC_4,   KC_5,   KC_GRV,
@@ -92,17 +48,58 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_GRV,         KC_6,         KC_7,       KC_8,    KC_9,    KC_0,             KC_EQL,
         RESET,          KC_Y,         KC_U,       KC_I,    KC_O,    KC_P,             KC_MINS,
                         KC_H,         KC_J,       KC_K,    KC_L,    KC_SCLN,          KC_QUOT,
-        TO(MAC, 1),     KC_N,         KC_M,       KC_COMM, KC_DOT,  KC_SLSH,          KC_BSLS,
-        KC_LALT,        KC_APP,       KC_LBRC,    KC_RBRC,          KC_NO,
+        KC_NO,          KC_N,         KC_M,       KC_COMM, KC_DOT,  KC_SLSH,          KC_BSLS,
+        KC_LALT,        KC_APP,       KC_LBRC,    KC_RBRC,          TO(MAC, 1),
                                                   KC_LEFT, KC_RGHT,
                                                   KC_UP,
                                                   KC_DOWN, KC_NO ,  KC_ENT
     ),
 
+/* Keymap 1: Mac
+ *
+ * ,--------------------------------------------------.           ,--------------------------------------------------.
+ * | ESC    |   1  |   2  |   3  |   4  |   5  | `~   |           | `~   |   6  |   7  |   8  |   9  |   0  |   =    |
+ * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
+ * | Tab    |   Q  |   W  |   E  |   R  |   T  |      |           |Reset |   Y  |   U  |   I  |   O  |   P  |   -    |
+ * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+ * | CTRL   |   A  |   S  |   D  |   F  |   G  |------|           |------|   H  |   J  |  K   |   L  |   ;  | '"/GUI |
+ * |--------+------+------+------+------+------|Window|           |      |------+------+------+------+------+--------|
+ * | LShift |Z/Ctrl|   X  |   C  |   V  |   B  |Switch|           |      |   N  |   M  |   ,  |   .  |//Ctrl|\/Shift |
+ * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
+ *   | cut  | paste| copy | Alt  | LGUI |                                       | RGUI |      | [    | ]    |  L1  |
+ *   `----------------------------------'                                       `----------------------------------'
+ *                                        ,-------------.       ,-------------.
+ *                                        |<-tab |tab-> |       | left |right |
+ *                                 ,------|------|------|       |------+--------+------.
+ *                                 |      |      | home |       | Up   |        |      |
+ *                                 |Space |Bask  |----- |       |----- |        |Enter |
+ *                                 |      |Space | End  |       | Down |        |      |
+ *                                 `--------------------'       `----------------------'
+ */
 
+[MAC] = KEYMAP(
+        // left hand
+        KC_ESC,         KC_1,         KC_2,       KC_3,    KC_4,   KC_5,   KC_GRV,
+        KC_TAB,         KC_Q,         KC_W,       KC_E,    KC_R,   KC_T,   KC_NO,
+        KC_LCTL,        KC_A,         KC_S,       KC_D,    KC_F,   KC_G,
+        KC_LSFT,        CTL_T(KC_Z),  KC_X,       KC_C,    KC_V,   KC_B,   LGUI(KC_GRV),
+        LGUI(KC_X),     LGUI(KC_V),   LGUI(KC_C), KC_LALT, KC_LGUI,
+                                                  LSFT(LCTL(KC_TAB)),   LCTL(KC_TAB),
+                                                           KC_HOME,
+                                                  KC_SPC,  KC_BSPC, KC_END,
 
+        // right hand
+        KC_GRV,          KC_6,         KC_7,       KC_8,    KC_9,    KC_0,             KC_EQL,
+        RESET,          KC_Y,         KC_U,       KC_I,    KC_O,    KC_P,             KC_MINS,
+                        KC_H,         KC_J,       KC_K,    KC_L,    LT(MDIA, KC_SCLN),         GUI_T(KC_QUOT),
+        KC_NO,          KC_N,         KC_M,       KC_COMM, KC_DOT,  CTL_T(KC_SLSH),   SFT_T(KC_BSLS),
+        KC_RGUI,        KC_NO,        KC_LBRC,    KC_RBRC,          TO(UBUNTU,1),
+                                                  KC_LEFT, KC_RGHT,
+                                                  KC_UP,
+                                                  KC_DOWN, KC_NO ,  KC_ENT
+    ),
 
-/* Keymap 1: Symbol Layer
+/* Keymap 2: Symbol Layer
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
  * |        |  F1  |  F2  |  F3  |  F4  |  F5  | F6   |           |  F7  |  F8  |  F9  |  F10 | F11  | F12  |        |
