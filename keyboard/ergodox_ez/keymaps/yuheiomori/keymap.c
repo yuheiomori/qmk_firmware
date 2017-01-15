@@ -219,10 +219,10 @@ void matrix_scan_user(void) {
     ergodox_right_led_3_off();
     switch (layer) {
       // TODO: Make this relevant to the ErgoDox EZ.
-        case MAC:
+        case UBUNTU:
             ergodox_right_led_1_on();
             break;
-        case UBUNTU:
+        case MAC:
             ergodox_right_led_2_on();
             break;
         default:
