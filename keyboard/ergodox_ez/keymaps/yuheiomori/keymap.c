@@ -24,11 +24,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *   | cut  | paste| copy | super| alt  |                                       | alt  | ctx  | [    | ]    |LMac  |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,---------------.
- *                                        |<-tab |tab-> |       | left |right   |
+ *                                        | Home | End  |       | left |right   |
  *                                 ,------|------|------|       |------+--------+------.
- *                                 |      |      | home |       | Up   |        |      |
+ *                                 |      |      | PgUp |       | Up   |        |      |
  *                                 |Space |Bask  |----- |       |----- |        |Enter |
- *                                 |      |Space | End  |       | Down |        |      |
+ *                                 |      |Space | PgDn |       | Down |        |      |
  *                                 `--------------------'       `----------------------'
  */
 // If it accepts an argument (i.e, is a function), it doesn't need KC_.
@@ -41,9 +41,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LCTL,        KC_A,         KC_S,       KC_D,    KC_F,   KC_G,
         KC_LSFT,        KC_Z,         KC_X,       KC_C,    KC_V,   KC_B,   MO(UBUNTUFN),
         LCTL(KC_X),     LCTL(KC_V),   LCTL(KC_C), KC_LGUI, KC_LALT,
-                                                  LSFT(LCTL(KC_TAB)),   LCTL(KC_TAB),
-                                                           KC_HOME,
-                                                  KC_SPC,  KC_BSPC, KC_END,
+                                                           KC_HOME, KC_END,
+                                                                    KC_KGUP,
+                                                  KC_SPC,  KC_BSPC, KC_KGDOWN,
 
         // right hand
         KC_GRV,         KC_6,         KC_7,       KC_8,    KC_9,    KC_0,             KC_EQL,
@@ -70,11 +70,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *   | cut  | paste| copy | Alt  | LGUI |                                       | RGUI |      | [    | ]    |  L1  |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
- *                                        |<-tab |tab-> |       | left |right |
+ *                                        | Home | End  |       | left |right |
  *                                 ,------|------|------|       |------+--------+------.
- *                                 |      |      | home |       | Up   |        |      |
+ *                                 |      |      | PgUp |       | Up   |        |      |
  *                                 |Space |Bask  |----- |       |----- |        |Enter |
- *                                 |      |Space | End  |       | Down |        |      |
+ *                                 |      |Space | PgDn |       | Down |        |      |
  *                                 `--------------------'       `----------------------'
  */
 
@@ -85,9 +85,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LCTL,        KC_A,         KC_S,       KC_D,    KC_F,   KC_G,
         KC_LSFT,        KC_Z,         KC_X,       KC_C,    KC_V,   KC_B,   MO(MACFN),
         LGUI(KC_X),     LGUI(KC_V),   LGUI(KC_C), KC_LALT, KC_LGUI,
-                                                  LSFT(LCTL(KC_TAB)),   LCTL(KC_TAB),
-                                                           KC_HOME,
-                                                  KC_SPC,  KC_BSPC, KC_END,
+                                                           KC_HOME, KC_END,
+                                                                    KC_PGUP,
+                                                  KC_SPC,  KC_BSPC, KC_PGDOWN,
 
         // right hand
         KC_GRV,         KC_6,         KC_7,       KC_8,    KC_9,    KC_0,             KC_EQL,
