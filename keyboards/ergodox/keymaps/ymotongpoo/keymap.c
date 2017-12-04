@@ -5,58 +5,14 @@
 #include "debug.h"
 #include "action_layer.h"
 
-#define MAC     0  // default layer (for OSX)
-#define WINDOWS 1  // default layer (for Windows)
-#define MACFN   2  // mac functions
-#define WINFN   3  // win functions
+#define WINDOWS 0  // default layer (for Windows)
+#define MAC     1  // default layer (for OSX)
+#define WINFN   2  // win functions
+#define MACFN   3  // mac functions
 #define MOUSE   4  // mouse mode
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-/* Keymap 0: OS X layer
- *
- * ,--------------------------------------------------.           ,--------------------------------------------------.
- * |   =    |   1  |   2  |   3  |   4  |   5  | `~   |           | `~   |   6  |   7  |   8  |   9  |   0  |   -    |
- * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * | Tab    |   Q  |   W  |   E  |   R  |   T  | ⌘ + ←|           | ⌘ + →|   Y  |   U  |   I  |   O  |   P  |   \    |
- * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * | CTRL   |   A  |   S  |   D  |   F  |   G  |------|           |------|   H  |   J  |   K  |   L  |   ;  |   '"   |
- * |--------+------+------+------+------+------| LGui |           | LFn  |------+------+------+------+------+--------|
- * | LShift |   Z  |   X  |   C  |   V  |   B  |      |           |      |   N  |   M  |   ,  |   .  |   /  | RShift |
- * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   |  cut | paste| copy | Left | Right|                                       |  Up  | Down |   [  |   ]  | LWin  |
- *   `----------------------------------'                                       `----------------------------------'
- *                                        ,-------------.       ,-------------.
- *                                        | LGui | LAlt |       | Alt  | Esc  |
- *                                 ,------|------|------|       |------+--------+------.
- *                                 |      |      | Home |       | PgUp |        |      |
- *                                 |Backsp|Delete|------|       |------| Enter  |Space |
- *                                 |ace   |      | End  |       | PgDn |        |      |
- *                                 `--------------------'       `----------------------'
- */
-// If it accepts an argument (i.e, is a function), it doesn't need KC_.
-// Otherwise, it needs KC_*
-[MAC] = KEYMAP( // layer 0 : default
-        // left hand
-        KC_EQL,         KC_1,         KC_2,        KC_3,      KC_4,   KC_5,   KC_GRV,
-        KC_TAB,         KC_Q,         KC_W,        KC_E,      KC_R,   KC_T,   LGUI(KC_LEFT),
-        KC_LCTL,        KC_A,         KC_S,        KC_D,      KC_F,   KC_G,
-        KC_LSFT,        KC_Z,         KC_X,        KC_C,      KC_V,   KC_B,   KC_LGUI,
-        LGUI(KC_X), LGUI(KC_V), LGUI(KC_C),     KC_LEFT,   KC_RGHT,
-                                                               KC_LGUI,       KC_LALT,
-                                                                              KC_HOME,
-                                                               KC_BSPC,KC_DELT,KC_END,
-        // right hand
-             KC_GRV,         KC_6,   KC_7,   KC_8,    KC_9,    KC_0,         KC_MINS,
-             LGUI(KC_RIGHT), KC_Y,   KC_U,   KC_I,    KC_O,    KC_P,         KC_BSLS,
-                             KC_H,   KC_J,   KC_K,    KC_L,    KC_SCLN,      KC_QUOT,
-             MO(MACFN),      KC_N,   KC_M,   KC_COMM, KC_DOT,  KC_SLSH,      KC_RSFT,
-                                     KC_UP,  KC_DOWN, KC_LBRC, KC_RBRC,      TO(WINDOWS,1),
-             KC_LALT,        KC_ESC,
-             KC_PGUP,
-             KC_PGDN,KC_ENT, KC_SPC
-    ),
-
-/* Keymap 1: Windows layer
+/* Keymap 0: Windows layer
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
  * |   =    |   1  |   2  |   3  |   4  |   5  | `~   |           |  `~  |   6  |   7  |   8  |   9  |   0  |   -    |
@@ -100,6 +56,51 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              KC_PGDN,KC_ENT, KC_SPC
     ),
 
+
+/* Keymap 1: OS X layer
+ *
+ * ,--------------------------------------------------.           ,--------------------------------------------------.
+ * |   =    |   1  |   2  |   3  |   4  |   5  | `~   |           | `~   |   6  |   7  |   8  |   9  |   0  |   -    |
+ * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
+ * | Tab    |   Q  |   W  |   E  |   R  |   T  | ⌘ + ←|           | ⌘ + →|   Y  |   U  |   I  |   O  |   P  |   \    |
+ * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+ * | CTRL   |   A  |   S  |   D  |   F  |   G  |------|           |------|   H  |   J  |   K  |   L  |   ;  |   '"   |
+ * |--------+------+------+------+------+------| LGui |           | LFn  |------+------+------+------+------+--------|
+ * | LShift |   Z  |   X  |   C  |   V  |   B  |      |           |      |   N  |   M  |   ,  |   .  |   /  | RShift |
+ * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
+ *   |  cut | paste| copy | Left | Right|                                       |  Up  | Down |   [  |   ]  | LWin  |
+ *   `----------------------------------'                                       `----------------------------------'
+ *                                        ,-------------.       ,-------------.
+ *                                        | LGui | LAlt |       | Alt  | Esc  |
+ *                                 ,------|------|------|       |------+--------+------.
+ *                                 |      |      | Home |       | PgUp |        |      |
+ *                                 |Backsp|Delete|------|       |------| Enter  |Space |
+ *                                 |ace   |      | End  |       | PgDn |        |      |
+ *                                 `--------------------'       `----------------------'
+ */
+// If it accepts an argument (i.e, is a function), it doesn't need KC_.
+// Otherwise, it needs KC_*
+[MAC] = KEYMAP( // layer 0 : default
+        // left hand
+        KC_EQL,         KC_1,         KC_2,        KC_3,      KC_4,   KC_5,   KC_GRV,
+        KC_TAB,         KC_Q,         KC_W,        KC_E,      KC_R,   KC_T,   LGUI(KC_LEFT),
+        KC_LCTL,        KC_A,         KC_S,        KC_D,      KC_F,   KC_G,
+        KC_LSFT,        KC_Z,         KC_X,        KC_C,      KC_V,   KC_B,   KC_LGUI,
+        LGUI(KC_X), LGUI(KC_V), LGUI(KC_C),     KC_LEFT,   KC_RGHT,
+                                                               KC_LGUI,       KC_LALT,
+                                                                              KC_HOME,
+                                                               KC_BSPC,KC_DELT,KC_END,
+        // right hand
+             KC_GRV,         KC_6,   KC_7,   KC_8,    KC_9,    KC_0,         KC_MINS,
+             LGUI(KC_RIGHT), KC_Y,   KC_U,   KC_I,    KC_O,    KC_P,         KC_BSLS,
+                             KC_H,   KC_J,   KC_K,    KC_L,    KC_SCLN,      KC_QUOT,
+             MO(MACFN),      KC_N,   KC_M,   KC_COMM, KC_DOT,  KC_SLSH,      KC_RSFT,
+                                     KC_UP,  KC_DOWN, KC_LBRC, KC_RBRC,      TO(WINDOWS,1),
+             KC_LALT,        KC_ESC,
+             KC_PGUP,
+             KC_PGDN,KC_ENT, KC_SPC
+    ),
+
 /* Keymap 2: Mac function Layer
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
@@ -121,6 +122,32 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                 |      |      |      |       |      |      |      |
  *                                 `--------------------'       `--------------------'
  */
+
+/*
+ * This layer contains IntelliJ shortcuts.
+ */
+// Fnctions
+[WINFN] = KEYMAP(
+       // left hand
+       KC_TRNS,       KC_F1,         KC_F2,       KC_F3,               KC_F4,                KC_F5,         KC_F6,
+       KC_TRNS,       KC_TRNS,       KC_TRNS,     LGUI(LCTL(KC_LEFT)), LGUI(LCTL(KC_RIGHT)), KC_TRNS,       KC_PSCR,
+       KC_TRNS,       KC_TRNS,       KC_TRNS,     LGUI(KC_D),          KC_TRNS,              KC_TRNS,
+       KC_TRNS,       KC_TRNS,       KC_TRNS,     KC_TRNS,             KC_TRNS,              LGUI(KC_PSCR), LALT(KC_PSCR),
+       LGUI(KC_LEFT), LGUI(KC_DOWN), LGUI(KC_UP), LGUI(KC_RIGHT),      KC_TRNS,
+                                                                                             KC_TRNS, KC_TRNS,
+                                                                                                      KC_TRNS,
+                                                                      LCTL(LSFT(KC_A)), LALT(KC_ENT), KC_TRNS,
+       // right hand
+       KC_F7,     KC_F8,   KC_F9,  KC_F10,  KC_F11,  KC_F12,  KC_TRNS,
+       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,
+                KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,
+       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,
+                KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  TO(MOUSE,1),
+       KC_TRNS, KC_MUTE,
+       KC_TRNS,
+       KC_TRNS, KC_VOLD, KC_VOLU
+    ),
+
 /*
  * This layer contains IntelliJ shortcuts.
  */
@@ -167,30 +194,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                 |      |      |      |       |      |      |      |
  *                                 `--------------------'       `--------------------'
  */
-/*
- * This layer contains IntelliJ shortcuts.
- */
-// Fnctions
-[WINFN] = KEYMAP(
-       // left hand
-       KC_TRNS,       KC_F1,         KC_F2,       KC_F3,               KC_F4,                KC_F5,         KC_F6,
-       KC_TRNS,       KC_TRNS,       KC_TRNS,     LGUI(LCTL(KC_LEFT)), LGUI(LCTL(KC_RIGHT)), KC_TRNS,       KC_PSCR,
-       KC_TRNS,       KC_TRNS,       KC_TRNS,     LGUI(KC_D),          KC_TRNS,              KC_TRNS,
-       KC_TRNS,       KC_TRNS,       KC_TRNS,     KC_TRNS,             KC_TRNS,              LGUI(KC_PSCR), LALT(KC_PSCR),
-       LGUI(KC_LEFT), LGUI(KC_DOWN), LGUI(KC_UP), LGUI(KC_RIGHT),      KC_TRNS,
-                                                                                             KC_TRNS, KC_TRNS,
-                                                                                                      KC_TRNS,
-                                                                      LCTL(LSFT(KC_A)), LALT(KC_ENT), KC_TRNS,
-       // right hand
-       KC_F7,     KC_F8,   KC_F9,  KC_F10,  KC_F11,  KC_F12,  KC_TRNS,
-       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,
-                KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,
-       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,
-                KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  TO(MOUSE,1),
-       KC_TRNS, KC_MUTE,
-       KC_TRNS,
-       KC_TRNS, KC_VOLD, KC_VOLU
-    ),
+
     
 /* Keymap 4: Mouse Layer
  *
@@ -237,8 +241,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 const uint16_t PROGMEM fn_actions[] = {
-    [1] = ACTION_LAYER_TAP_TOGGLE(MACFN),
-    [2] = ACTION_LAYER_TAP_TOGGLE(WINFN)               // FN1,2 - Momentary Layer 1,2 (functions)
+    [1] = ACTION_LAYER_TAP_TOGGLE(WINFN),
+    [2] = ACTION_LAYER_TAP_TOGGLE(MACFN)               // FN1,2 - Momentary Layer 1,2 (functions)
 };
 
 const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
@@ -280,24 +284,24 @@ void matrix_scan_user(void) {
     ergodox_right_led_3_off();
     switch (layer) {
       // TODO: Make this relevant to the ErgoDox EZ.
-        case MAC:
-            ergodox_right_led_1_on();
-            ergodox_right_led_2_off();
-            ergodox_right_led_3_off();
-            break;
         case WINDOWS:
             ergodox_right_led_1_off();
             ergodox_right_led_2_on();
             ergodox_right_led_3_off();
             break;
-        case MACFN:
+        case MAC:
             ergodox_right_led_1_on();
             ergodox_right_led_2_off();
-            ergodox_right_led_3_on();
+            ergodox_right_led_3_off();
             break;
         case WINFN:
             ergodox_right_led_1_off();
             ergodox_right_led_2_on();
+            ergodox_right_led_3_on();
+            break;
+        case MACFN:
+            ergodox_right_led_1_on();
+            ergodox_right_led_2_off();
             ergodox_right_led_3_on();
             break;
         case MOUSE:
