@@ -1,9 +1,9 @@
 // modified following file.
 // https://github.com/msc654/qmk_firmware/blob/master/keyboard%2Fergodox_ez%2Fkeymaps%2Fdefault%2Fkeymap.c
-
-#include "ergodox.h"
+#include QMK_KEYBOARD_H
 #include "debug.h"
 #include "action_layer.h"
+#include "version.h"
 
 #define WINDOWS 0  // default layer (for Windows)
 #define MAC     1  // default layer (for OSX)
@@ -50,7 +50,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              LALT(KC_RIGHT), KC_Y,   KC_U,   KC_I,     KC_O,     KC_P,      KC_BSLS,
                              KC_H,   KC_J,   KC_K,     KC_L,     KC_SCLN,   KC_QUOT,
              MO(WINFN),      KC_N,   KC_M,   KC_COMM,  KC_DOT,   KC_SLSH,   KC_RSFT,
-                                     KC_UP,  KC_DOWN,  KC_LBRC,  KC_RBRC,   TO(MAC,1),
+                                     KC_UP,  KC_DOWN,  KC_LBRC,  KC_RBRC,   TO(MAC),
              KC_LALT,        KC_ESC,
              KC_PGUP,
              KC_PGDN,KC_ENT, KC_SPC
@@ -95,7 +95,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              LGUI(KC_RIGHT), KC_Y,   KC_U,   KC_I,    KC_O,    KC_P,         KC_BSLS,
                              KC_H,   KC_J,   KC_K,    KC_L,    KC_SCLN,      KC_QUOT,
              MO(MACFN),      KC_N,   KC_M,   KC_COMM, KC_DOT,  KC_SLSH,      KC_RSFT,
-                                     KC_UP,  KC_DOWN, KC_LBRC, KC_RBRC,      TO(WINDOWS,1),
+                                     KC_UP,  KC_DOWN, KC_LBRC, KC_RBRC,      TO(WINDOWS),
              KC_LALT,        KC_ESC,
              KC_PGUP,
              KC_PGDN,KC_ENT, KC_SPC
@@ -142,7 +142,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,
                 KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,
        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,
-                KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  TO(MOUSE,1),
+                KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  TO(MOUSE),
        KC_TRNS, KC_MUTE,
        KC_TRNS,
        KC_TRNS, KC_VOLD, KC_VOLU
@@ -167,7 +167,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,
                 KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,
        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,
-                KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  TO(MOUSE,1),
+                KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  TO(MOUSE),
        KC_TRNS, KC_MUTE,
        KC_TRNS,
        KC_TRNS, KC_VOLD, KC_VOLU
@@ -230,9 +230,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                      KC_SPC, KC_ENT, KC_TRNS,
        // right hand
        KC_F7,           KC_F8,   KC_F9,  KC_F10,  KC_F11,  KC_F12,  KC_TRNS,
-       TO(MAC,1),     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,
+       TO(MAC),     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,
                       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,
-       TO(WINDOWS,1), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,
+       TO(WINDOWS), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,
                       KC_ACL2, KC_ACL1, KC_ACL0, KC_TRNS,  KC_TRNS,
        KC_BTN4, KC_BTN3,
        KC_PGUP,
