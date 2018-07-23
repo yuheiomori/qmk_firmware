@@ -281,26 +281,26 @@ void matrix_scan_user(void) {
     switch (layer) {
       // TODO: Make this relevant to the ErgoDox EZ.
         case MAC:
-          ergodox_right_led_1_off();
-          ergodox_right_led_2_on();
+          ergodox_right_led_1_on();
+          ergodox_right_led_2_off();
           ergodox_right_led_3_off();
           break;
 
         case MACFN:
-          ergodox_right_led_1_off();
-          ergodox_right_led_2_on();
+          ergodox_right_led_1_on();
+          ergodox_right_led_2_off();
           ergodox_right_led_3_on();
           break;
 
         case UBUNTU:
-          ergodox_right_led_1_on();
-          ergodox_right_led_2_off();
+          ergodox_right_led_1_off();
+          ergodox_right_led_2_on();
           ergodox_right_led_3_off();
           break;
 
         case UBUNTUFN:
-          ergodox_right_led_1_on();
-          ergodox_right_led_2_off();
+          ergodox_right_led_1_off();
+          ergodox_right_led_2_on();
           ergodox_right_led_3_on();
           break;
 
