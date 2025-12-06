@@ -79,7 +79,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [MACFN] = KEYMAP(
                  // left hand
                  KC_TRNS,     KC_F1,    KC_F2,   KC_F3,   KC_F4,    KC_F5,   KC_F6,
-                 KC_TRNS,     KC_NO,    KC_NO  , KC_NO,   KC_NO,    KC_NO,   KC_TRNS,
+                 KC_TRNS,     RGB_TOG,  RGB_MOD, RGB_HUI, RGB_SAI,  RGB_VAI, KC_TRNS,
                  KC_TRNS,     KC_NO,    KC_ACL0, KC_ACL1, KC_ACL2,  KC_NO,
                  KC_TRNS,     KC_NO,    KC_NO,   KC_NO,   KC_NO,    KC_NO,   KC_NO,
                  KC_TRNS,     KC_TRNS,  KC_TRNS, KC_TRNS, KC_TRNS,
